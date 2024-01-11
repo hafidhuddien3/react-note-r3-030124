@@ -96,6 +96,7 @@ input::placeholder, textarea::placeholder {
   grid-template-rows: minmax(min-content, max-content);
   gap: 16px;
   margin-bottom: 48px;
+  margin: 8px;
 }
 
 .notes-list__empty-message {
@@ -166,6 +167,58 @@ input::placeholder, textarea::placeholder {
   color: #b00020;
 }
 
+h2{
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.search-bar{
+  text-align: center;
+}
+
+nav li{
+  list-style-type: none;
+  display: inline-block;
+  margin-right: 25px;
+}
+
+.navigation{
+flex: 1;  
+}
+
+nav ul{
+  display: flex;
+  justify-content:flex-end;
+}
+
+.NoteDetail{
+  margin: 10px;
+}
+
+.note-item__content a{
+  text-decoration: inherit;
+  color: inherit;
+}
+
+.icon{
+  color:white;
+}
+
+.icon:active{
+  color:grey;
+}
+
+.NoteDetail button{
+  display: block;
+  width: 20%;
+  margin:auto;
+  padding: 5px;
+}
+
+.h3-empty-notes{
+  text-align: center;
+}
+
 @media only screen and (min-width: 500px) {
   .notes-list {
     grid-template-columns: 1fr 1fr;
@@ -182,7 +235,7 @@ input::placeholder, textarea::placeholder {
   }
 }
 
-@media only screen and (min-width: 800px) {
+@media only screen and (min-width: 1000px) {
   .notes-list {
     grid-template-columns: repeat(4, 1fr);
   }
