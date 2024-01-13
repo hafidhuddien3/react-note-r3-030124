@@ -240,7 +240,6 @@ nav ul{
 }
 
 .register-input{
-  background-color: var(--background-color);
   color: var(--font-color);
 }
 
@@ -255,10 +254,6 @@ nav ul{
   display: flex;
   flex-direction: column;
 margin: 10px;
-}
-
-.register-input input{
-background-color: var(--background-color);
 }
 
 .register-page p, .login-page p{
