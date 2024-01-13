@@ -6,19 +6,34 @@
 
 body {
   font-family: 'Inter', sans-serif;
-  background-color: #202124;
+  background-color: white;
+  color: black;
+}
+
+:root {
+  --font-color: black;
+  --background-color: #eee;
+}
+
+[data-theme='dark'] {
+  background-color: black;
   color: white;
+
+  --font-color: white;
+  --background-color: black;
 }
 
 input, textarea {
   padding: 12px;
   margin: 12px 0;
   font-family: 'Inter', sans-serif;
-  background-color: transparent;
-  color: white;
+  background-color: var(--background-color);
+  color: var(--font-color);
   border: 1px solid #aaa;
   border-radius: 4px;
 }
+
+
 
 input::placeholder, textarea::placeholder {
   color: #aaa;
@@ -36,7 +51,7 @@ input::placeholder, textarea::placeholder {
 .note-app__header h1 {
   margin: 8px 0;
   flex: 1;
-  color: white;
+  color: var(--font-color);
 }
 
 
@@ -52,11 +67,12 @@ input::placeholder, textarea::placeholder {
 }
 
 .note-input {
-  
   margin: 0 auto;
   max-width: 500px;
-  margin-bottom: 48px;
+  margin-bottom: 48px; 
 }
+
+
 
 .note-input input, .note-input textarea {
   display: block;
@@ -70,7 +86,7 @@ input::placeholder, textarea::placeholder {
 .note-input__title__char-limit {
   font-size: 14px;
   text-align: right;
-  color: #aaa;
+  
 }
 
 .note-input__body {
@@ -127,7 +143,7 @@ input::placeholder, textarea::placeholder {
 .note-item__date {
   font-size: 12px;
   margin-bottom: 8px;
-  color: #aaa;
+  color: var(--font-color);
 }
 
 .note-item__body {
@@ -176,6 +192,10 @@ h2{
   text-align: center;
 }
 
+.search-bar input{
+  color: var(--font-color);
+}
+
 nav li{
   list-style-type: none;
   display: inline-block;
@@ -200,8 +220,8 @@ nav ul{
   color: inherit;
 }
 
-.icon{
-  color:white;
+.icon, a{
+  color: var(--font-color);
 }
 
 .icon:active{
@@ -218,6 +238,42 @@ nav ul{
 .h3-empty-notes{
   text-align: center;
 }
+
+.register-input{
+  background-color: var(--background-color);
+  color: var(--font-color);
+}
+
+.log-out{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0 5px;
+}
+
+.register-input, .input-login{
+  display: flex;
+  flex-direction: column;
+margin: 10px;
+}
+
+.register-input input{
+background-color: var(--background-color);
+}
+
+.register-page p, .login-page p{
+text-align: center;
+}
+
+.register-input button, .input-login button{
+  width: 30%;
+  padding: 5px;
+  align-self: center;
+}
+
+.note-input button{
+  color: var(--font-color);
+  }
 
 @media only screen and (min-width: 500px) {
   .notes-list {

@@ -1,6 +1,6 @@
 import React from 'react';
 import NoteList from '../components/NoteList';
-import { deleteNote, getAllNotes } from '../utils/local-data';
+import { deleteNote, getActiveNotes } from '../utils/network-data';
 import SearchBar from '../components/SearchBar';
 import { useSearchParams } from 'react-router-dom';
  
@@ -20,7 +20,7 @@ class HomePage extends React.Component {
     super(props);
  
     this.state = {
-      notes: getAllNotes(),
+      notes: [],
       keyword: props.defaultKeyword || '',
     }
  
@@ -28,12 +28,23 @@ class HomePage extends React.Component {
     this.onKeywordChangeHandler = this.onKeywordChangeHandler.bind(this);
   }
  
-  onDeleteHandler(id) {
-    deleteNote(id);
- 
+  async componentDidMount() {
+    const { data } = await getActiveNotes();
+    
     this.setState(() => {
       return {
-        notes: getAllNotes(),
+        notes: data
+      }
+    })
+  }
+
+  async onDeleteHandler(id) {
+    await deleteNote(id);
+ 
+    const { data  } = await getActiveNotes();
+    this.setState(() => {
+      return {
+        notes: data,
       }
     });
   }

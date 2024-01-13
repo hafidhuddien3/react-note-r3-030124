@@ -1,14 +1,14 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import NoteDetail from '../components/NoteDetail';
-import { getNote, deleteNote } from '../utils/local-data';
+import { getNote, deleteNote } from '../utils/network-data';
 import { useNavigate } from 'react-router-dom';
  
 function DetailPageWrapper() {
 const navigate = useNavigate();
 
-function onDeleteHandler(id) {    
-        deleteNote(id);
+async function onDeleteHandler(id) {    
+  await deleteNote(id);
         navigate('/');
 }
 
@@ -21,11 +21,20 @@ class DetailPage extends React.Component {
       super(props);
    
       this.state = {
-        note: getNote(props.id)
+        note: null
       };
 
       this.onDeleteHandler = this.onDeleteHandler.bind(this);
+    }
 
+    async componentDidMount() {
+      const { data } = await getNote(this.props.id);
+      
+      this.setState(() => {
+        return {
+          note: data
+        }
+      })
     }
 
     onDeleteHandler(id) {

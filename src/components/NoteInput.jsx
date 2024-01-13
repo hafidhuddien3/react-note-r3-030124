@@ -55,11 +55,7 @@ class NoteInput extends React.Component {
     <p>Karakter sisa: {this.state.remainingChar}</p>
     <textarea placeholder="Body" value={this.state.body} onChange={this.onBodyChangeEventHandler} />
     
-    Archived status:&nbsp;
-    <select id="gender" value={this.state.archived} onChange={this.onArchivedChangeEventHandler}>
-           <option value="false">False</option>
-           <option value="true">True</option>
-         </select>
+  
          <br /><br />
     <button type="submit">Tambah</button>
     
