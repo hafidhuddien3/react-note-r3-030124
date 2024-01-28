@@ -270,6 +270,15 @@ text-align: center;
   color: var(--font-color);
   }
 
+.guest{
+  margin-left: 10px;
+}
+
+.guest button{
+  padding: 5px;
+  margin-top: 5px;
+}
+
 @media only screen and (min-width: 500px) {
   .notes-list {
     grid-template-columns: 1fr 1fr;
