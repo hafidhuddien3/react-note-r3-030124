@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
  
-function SearchBar({ keyword, keywordChange }) {
+function SearchBar({ keyword, keywordChange, locale }) {
   return (<div className="search-bar">
     <input
       type="text"
-      placeholder="Cari judul atau body"
+      placeholder={locale === 'id' ? 'Cari judul atau body' : 'Search the title or body'}
       value={keyword}
       onChange={(event) => keywordChange(event.target.value)} /></div>
   )

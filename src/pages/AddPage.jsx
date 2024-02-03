@@ -3,10 +3,14 @@ import { addNote } from '../utils/network-data';
 import NoteInput from '../components/NoteInput';
 import { useNavigate } from 'react-router-dom';
 
+import LocaleContext from '../contexts/LocaleContext';
+import { add } from '../utils/locale-content';
+
 //addNote({ title, body })
  
 function AddPage() {
     const navigate = useNavigate();
+    const { locale } = React.useContext(LocaleContext);
 
   async function onAddNoteHandler(note) {
     if (note.title && note.body){
@@ -21,8 +25,8 @@ function AddPage() {
   return (
     <section>
       <br/>
-      <h2 className='h2add'>Tambah Catatan</h2>
-      <NoteInput addNote={onAddNoteHandler} />
+      <h2 className='h2add'>{add[locale].header}</h2>
+      <NoteInput addNote={onAddNoteHandler} locale={locale} />
     </section>
   )
 }

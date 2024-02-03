@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-function GuestAccount({ login }) {
+function GuestAccount({ login, locale }) {
   return (
     <div className="guest"><br/>
-      Atau menggunakan akun guest<br/>
+      {locale === 'id' ? 'Atau menggunakan akun guest':'Or use a guest account'}<br/>
       <button
         type="button"
         onClick={() => login({
@@ -12,7 +12,7 @@ function GuestAccount({ login }) {
           password: 'passwordtamu',
         })}
       >
-        Menggunakan Akun Guest
+        {locale === 'id' ? 'Menggunakan Akun Guest' : 'Using a Guest Account'}
       </button>
     </div>
   );

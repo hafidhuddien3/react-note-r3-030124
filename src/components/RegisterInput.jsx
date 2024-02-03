@@ -54,10 +54,10 @@ class RegisterInput extends React.Component {
   render() {
     return (
       <form onSubmit={this.onSubmitHandler} className="register-input">
-        <input type="text" placeholder="Nama" value={this.state.name} onChange={this.onNameChange} />
+        <input type="text" placeholder={this.props.locale === 'id' ? 'Nama':'Name'} value={this.state.name} onChange={this.onNameChange} />
         <input className="inputLogin" type="email" placeholder="Email" value={this.state.email} onChange={this.onEmailChange} />
-        <input className="inputLogin" type="password" placeholder="Password" autoComplete='current-password' value={this.state.password} onChange={this.onPasswordChange} />
-        <button>Register</button>
+        <input className="inputLogin" type="password" placeholder={this.props.locale === 'id' ? 'Kata sandi':'Password'} autoComplete='current-password' value={this.state.password} onChange={this.onPasswordChange} />
+        <button>{this.props.locale === 'id' ? 'Daftar':'Register'}</button>
       </form>
     )
   }

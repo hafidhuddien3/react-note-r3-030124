@@ -7,14 +7,29 @@ import AddPage from '../pages/AddPage';
 import DetailPage from '../pages/DetailPage';
 import RegisterPage from '../pages/RegisterPage';
 import LoginPage from '../pages/LoginPage';
+import Pages404 from '../pages/Pages404';
+import ArchivedPage from '../pages/ArchivedPage';
 import { getUserLogged, putAccessToken } from '../utils/network-data';
 import ThemeContext from '../contexts/ThemeContext';
+import LocaleContext from '../contexts/LocaleContext';
  
  
 function NoteApp() {
 
   const [authedUser, setAuthedUser] = React.useState(null);
   const [initializing, setInitializing] = React.useState(true);
+
+  const [locale, setLocale] = React.useState(localStorage.getItem('locale') || 'en');
+
+  const toggleLocale = () => {
+    setLocale((prevLocale) => {
+      const newLocale = prevLocale === 'id' ? 'en' : 'id';
+      
+      localStorage.setItem('locale', newLocale);
+
+      return prevLocale === 'id' ? 'en' : 'id';
+    });
+  };
 
   const [theme, setTheme] = React.useState(localStorage.getItem('theme') || 'light');
   const toggleTheme = () => {
@@ -30,9 +45,16 @@ function NoteApp() {
   const themeContextValue = React.useMemo(() => {
     return {
       theme,
-      toggleTheme
+      toggleTheme,
     };
   }, [theme]);
+
+  const localeContextValue = React.useMemo(() => {
+    return {
+      locale,
+      toggleLocale
+    };
+  }, [locale]);
 
   React.useEffect(() => {
     
@@ -66,10 +88,11 @@ function NoteApp() {
 
   if (authedUser === null) {
     return (
+      <LocaleContext.Provider value={localeContextValue}>
       <ThemeContext.Provider value={themeContextValue}>
       <div className='note-app'>
         <header className='note-app__header'>
-          <h1>Aplikasi Catatan</h1>
+          <h1>{locale === 'id' ? 'Aplikasi Catatan':'Notes App'}</h1>
         </header>
         <main>
           <Routes>
@@ -78,26 +101,29 @@ function NoteApp() {
           </Routes>
         </main>
       </div>
-      </ThemeContext.Provider>
+      </ThemeContext.Provider></LocaleContext.Provider>
     )
   }
 
   return (
+    <LocaleContext.Provider value={localeContextValue}>
     <ThemeContext.Provider value={themeContextValue}>
     <div className="note-app">
       <header className='note-app__header'>
-        <h1>Aplikasi Catatan</h1>
+        <h1>{locale === 'id' ? 'Aplikasi Catatan':'Notes App'}</h1>
         <Navigation logout={onLogout} name={authedUser.name} />
       </header>
       <main>
         <Routes>
           <Route path="/" element={<HomePage />} />
+          <Route path="/archived" element={<ArchivedPage />} />
           <Route path="/new" element={<AddPage />} />
           <Route path="/notes/:id" element={<DetailPage />} />
+          <Route path="/*" element={< Pages404 />} />
         </Routes>
       </main>
     </div>
-    </ThemeContext.Provider>
+    </ThemeContext.Provider></LocaleContext.Provider>
   );
 }
  

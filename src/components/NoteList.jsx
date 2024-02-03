@@ -2,21 +2,34 @@ import React from 'react';
 import NoteItem from './NoteItem';
 import PropTypes from 'prop-types';
  
-function NoteList({ notes, onDelete }) {
- return (
-  notes.length!=0 ?(
-   <div className="notes-list">
-     { 
-       notes.map((note) => (
-         <NoteItem key={note.id} 
-         id={note.id}
-         onDelete={onDelete}
-         {...note} />
-       ))
+function NoteList({ notes, onDelete, loading, type, onArchived, onUnarchived }) {
+  const noNoteMessage=type ? 'Arsip kosong':'Tidak ada catatan';
+
+  if (loading==true) {
+    return (<div className=''><h3 className='h3-empty-notes'>Loading</h3></div>);
+  }
+
+  else if (notes.length==0){
+    return (<div className=''><h3 className='h3-empty-notes'>{noNoteMessage}</h3></div>);}
+
+ else{return(
+  <div className="notes-list">
+    { 
+      notes.map((note) => (
+        <NoteItem key={note.id} 
+        id={note.id}
+        onDelete={onDelete}
+
+        type={type}
+        onArchived={onArchived}
+        onUnarchived={onUnarchived}
         
-     }
-   </div>): (<div className=''><h3 className='h3-empty-notes'>Tidak ada catatan</h3></div>)
- );
+        {...note} />
+      ))
+       
+    }
+  </div>);}
+  
 }
 
 NoteList.propTypes = {

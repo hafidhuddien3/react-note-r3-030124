@@ -51,13 +51,13 @@ class NoteInput extends React.Component {
  render() {
    return (
     <form className="note-input" onSubmit={this.onSubmitEventHandler}>
-    <input type="text" placeholder="Judul" value={this.state.title} onChange={this.onTitleChangeEventHandler} />
-    <p>Karakter sisa: {this.state.remainingChar}</p>
+    <input type="text" placeholder={this.props.locale === 'id' ? 'Judul':'Title'} value={this.state.title} onChange={this.onTitleChangeEventHandler} />
+    <p>{this.props.locale === 'id' ? 'Karakter sisa: ':'Remaining character: '}{this.state.remainingChar}</p>
     <textarea placeholder="Body" value={this.state.body} onChange={this.onBodyChangeEventHandler} />
     
   
          <br /><br />
-    <button type="submit">Tambah</button>
+    <button type="submit">{this.props.locale === 'id' ? 'Tambah':'Add'}</button>
     
      </form>
    )

@@ -1,13 +1,12 @@
 import React from 'react';
 import NoteList from '../components/NoteList';
-import { deleteNote, getActiveNotes, archiveNote } from '../utils/network-data';
+import { deleteNote, getArchivedNotes, unarchiveNote } from '../utils/network-data';
 import SearchBar from '../components/SearchBar';
 import { useSearchParams } from 'react-router-dom';
 import LocaleContext from '../contexts/LocaleContext';
-import { home } from '../utils/locale-content';
-import { Link } from 'react-router-dom'; 
-
-function HomePageWrapper() {
+import { archived } from '../utils/locale-content';
+ 
+function ArchivedPageWrapper() {
   const [searchParams, setSearchParams] = useSearchParams();
   const keyword = searchParams.get('keyword');
   const { locale } = React.useContext(LocaleContext);
@@ -31,12 +30,12 @@ class HomePage extends React.Component {
     }
  
     this.onDeleteHandler = this.onDeleteHandler.bind(this);
-    this.onArchived = this.onArchived.bind(this);
     this.onKeywordChangeHandler = this.onKeywordChangeHandler.bind(this);
+    this.onUnarchived = this.onUnarchived.bind(this);
   }
  
   async componentDidMount() {
-    const { data } = await getActiveNotes();
+    const { data } = await getArchivedNotes();
 
     
     this.setState(() => {
@@ -60,7 +59,7 @@ class HomePage extends React.Component {
   async onDeleteHandler(id) {
     await deleteNote(id);
  
-    const { data  } = await getActiveNotes();
+    const { data  } = await getArchivedNotes();
     this.setState(() => {
       return {
         notes: data,
@@ -68,10 +67,10 @@ class HomePage extends React.Component {
     });
   }
 
-  async onArchived(id) {
-    await archiveNote(id);
+  async onUnarchived(id) {
+    await unarchiveNote(id);
  
-    const { data  } = await getActiveNotes();
+    const { data  } = await getArchivedNotes();
     this.setState(() => {
       return {
         notes: data,
@@ -101,13 +100,13 @@ class HomePage extends React.Component {
       <section>
         <SearchBar keyword={this.state.keyword} keywordChange={this.onKeywordChangeHandler} 
         locale={this.state.locale} />
-        <h2>{home[this.state.locale].header}</h2>
-        <Link to={`/archived`}><button className='archive-page-button'>{home[this.state.locale].archived}</button></Link>
-        <NoteList notes={notes} onDelete={this.onDeleteHandler} loading={this.state.loading}
-        onArchived={this.onArchived}/>
+        <h2>{archived[this.state.locale].header}</h2>
+        <NoteList notes={notes} onDelete={this.onDeleteHandler} loading={this.state.loading} type='archived'
+        onUnarchived={this.onUnarchived}
+        />
       </section>
     )
   }
 }
  
-export default HomePageWrapper;
+export default ArchivedPageWrapper;

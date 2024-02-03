@@ -41,7 +41,7 @@ input::placeholder, textarea::placeholder {
 }
 
 .note-app__header {
-  display: flex;
+  display: block;
   align-items: center;
   justify-content: center;
   padding: 4px 16px;
@@ -200,15 +200,16 @@ nav li{
   list-style-type: none;
   display: inline-block;
   margin-right: 25px;
+  align-self:center;
 }
 
-.navigation{
-flex: 1;  
+nav button{
+  padding: 3px 4px;
 }
+
 
 nav ul{
   display: flex;
-  justify-content:flex-end;
 }
 
 .NoteDetail{
@@ -279,9 +280,17 @@ text-align: center;
   margin-top: 5px;
 }
 
+.archive-page-button{
+padding: 10px;
+margin-left: 10px;
+}
+
 @media only screen and (min-width: 500px) {
   .notes-list {
     grid-template-columns: 1fr 1fr;
+  }
+  .note-app__header{
+    display: flex; 
   }
 }
 
